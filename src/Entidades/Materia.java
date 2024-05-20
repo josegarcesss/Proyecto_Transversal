@@ -29,6 +29,38 @@ public class Materia {
         this.anio_materia = anio_materia;
         this.estado = estado;
     }
+
+    public int getId_Materia() {
+        return id_Materia;
+    }
+
+    public void setId_Materia(int id_Materia) {
+        this.id_Materia = id_Materia;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getAnio_materia() {
+        return anio_materia;
+    }
+
+    public void setAnio_materia(int anio_materia) {
+        this.anio_materia = anio_materia;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
     
 
     @Override

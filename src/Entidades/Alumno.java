@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author Alakyan
  */
 public class Alumno {
-    private int id_Alumno;
+    private int id_alumno;
     private int dni;
     private String nombre;
     private String apellido;
@@ -28,8 +28,8 @@ public class Alumno {
         this.estado = estado;
     }
 
-    public Alumno(int id_Alumno,int dni, String nombre, String apellido, LocalDate fechaN, boolean estado) {
-        this.id_Alumno = id_Alumno;
+    public Alumno(int id_alumno,int dni, String nombre, String apellido, LocalDate fechaN, boolean estado) {
+        this.id_alumno = id_alumno;
         this.dni=dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -37,12 +37,12 @@ public class Alumno {
         this.estado = estado;
     }
 
-    public int getId_Alumno() {
-        return id_Alumno;
+    public int getId_alumno() {
+        return id_alumno;
     }
 
-    public void setId_Alumno(int id_Alumno) {
-        this.id_Alumno = id_Alumno;
+    public void setId_Alumno(int id_alumno) {
+        this.id_alumno = id_alumno;
     }
 
     public int getDNI() {
@@ -89,7 +89,7 @@ public class Alumno {
     
     @Override
     public String toString(){
-        return(id_Alumno+" - "+dni+" - "+nombre+" - "+apellido+" - "+fechaN+" - "+estado);
+        return(id_alumno+" - "+dni+" - "+nombre+" - "+apellido+" - "+fechaN+" - "+estado);
     } 
 
     
