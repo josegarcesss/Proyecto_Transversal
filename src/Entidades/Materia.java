@@ -9,7 +9,7 @@ package Entidades;
  * @author Alakyan
  */
 public class Materia {
-    private int id_Materia;
+    private int id_materia;
     private String nombre;
     private int anio_materia;
     private boolean estado;
@@ -23,19 +23,19 @@ public class Materia {
         this.estado = estado;
     }
 
-    public Materia(int id_Materia, String nombre, int anio_materia, boolean estado) {
-        this.id_Materia = id_Materia;
+    public Materia(int id_materia, String nombre, int anio_materia, boolean estado) {
+        this.id_materia = id_materia;
         this.nombre = nombre;
         this.anio_materia = anio_materia;
         this.estado = estado;
     }
 
     public int getId_Materia() {
-        return id_Materia;
+        return id_materia;
     }
 
-    public void setId_Materia(int id_Materia) {
-        this.id_Materia = id_Materia;
+    public void setId_Materia(int id_materia) {
+        this.id_materia = id_materia;
     }
 
     public String getNombre() {
@@ -65,7 +65,7 @@ public class Materia {
 
     @Override
     public String toString(){
-        return(id_Materia+" - "+nombre+" - "+anio_materia+" - "+estado);
+        return(id_materia+" - "+nombre+" - "+anio_materia+" - "+estado);
     }
     
     
