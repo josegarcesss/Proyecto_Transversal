@@ -49,5 +49,19 @@ public class inscripcionData {
         return materiasCursadas;
     }
     
+    public void GuardarInscripcion(Inscripcion inscripcion){
+        String sql="INSERT INTO inscripcion (id_alumno, id_materia) VALUES (?, ?)";
+        try{
+            PreparedStatement ps =con.prepareStatement(sql);
+            ps.setInt(1, inscripcion.getAlumno().getId_alumno());
+            ps.setInt(1, inscripcion.getMateria().getId_Materia());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null,"*Inscripcion guardada*");
+            ps.close();
+            }
+        catch (SQLException ex){
+            JOptionPane.showMessageDialog(null,"*ERROR, no se guardo la inscripcion*");
+        }
+    }
     
 }
