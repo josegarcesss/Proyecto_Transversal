@@ -4,12 +4,11 @@
  */
 package AccesoADatos;
 
+import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,6 +23,9 @@ public class inscripcionData {
     public inscripcionData(){
         con = Conexion.getConexion();
     }
+    
+    
+    
     
     
     public List<Materia> obtenerMateriasCursadas(int idAlumno){
@@ -89,5 +91,28 @@ public class inscripcionData {
         }
     }
     
+    public List<Alumno> obtenerAlumnosXMateria(int idMateria){
+       List<Alumno> alumnos = new ArrayList<>();
+       String sql="SELECT * FROM alumno WHERE estado=1 AND id_alumno IN(SELECT id_alumno FROM inscripcion WHERE id_materia=?)";
+       try{
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1,idMateria);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()){
+                   Alumno alum=new Alumno();
+                   alum.setId_Alumno(rs.getInt("id_alumno"));
+                   alum.setDNI(rs.getInt("dni"));
+                   alum.setNombre(rs.getString("nombre"));
+                   alum.setApellido(rs.getString("apellido"));
+                   alum.setFechaN(rs.getDate("fechaN").toLocalDate());
+                   alum.setEstado(rs.getBoolean("estado"));
+                   alumnos.add(alum);
+                }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null,"*Error* No se pudo obtener las materias del alumno");
+        }
+        return alumnos;
+    }
     
 }
