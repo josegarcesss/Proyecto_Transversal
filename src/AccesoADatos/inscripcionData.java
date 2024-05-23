@@ -33,16 +33,17 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasCursadas(int idAlumno){
         List<Materia> materiasCursadas=new ArrayList<>();
         
-        String sql = "SELECT inscripcion.id_materia, nombre, año FROM inscripcion JOIN materia ON(inscripcion.id_materia=materia.id_materia) WHERE estado=1 AND inscripcion.id_alumno=?";
+        String sql = "SELECT inscripcion.id_materia, nombre, año,estado FROM inscripcion JOIN materia ON(inscripcion.id_materia=materia.id_materia) WHERE estado=1 AND inscripcion.id_alumno=?";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1,idAlumno);
             ResultSet rs= ps.executeQuery();
             while (rs.next()){
                    Materia materia=new Materia();
-                   materia.setId_Materia(rs.getInt("isMateria"));
+                   materia.setId_Materia(rs.getInt("id_materia"));
                    materia.setNombre(rs.getString("nombre"));
                    materia.setAnio_materia(rs.getInt("año"));
+                   materia.setEstado(rs.getBoolean("estado"));
                    materiasCursadas.add(materia);
         
                 }
@@ -64,9 +65,10 @@ public class InscripcionData {
             ResultSet rs= ps.executeQuery();
             while (rs.next()){
                    Materia materia=new Materia();
-                   materia.setId_Materia(rs.getInt("isMateria"));
+                   materia.setId_Materia(rs.getInt("id_materia"));
                    materia.setNombre(rs.getString("nombre"));
                    materia.setAnio_materia(rs.getInt("año"));
+                   materia.setEstado(rs.getBoolean("estado"));
                    materiasNOCursadas.add(materia);
         
                 }
@@ -92,6 +94,7 @@ public class InscripcionData {
                 
                 JOptionPane.showMessageDialog(null,"*Inscripcion guardada*");
             }
+            ps.close();
             }
         catch (SQLException ex){
             JOptionPane.showMessageDialog(null,"*ERROR, no se guardo la inscripcion*");

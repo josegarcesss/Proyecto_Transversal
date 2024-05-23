@@ -56,6 +56,13 @@ public class Main_Principal {
           for (Alumno alum:listar){
               System.out.println(alum);
         }
+          List<Materia> listMat= inscripData.obtenerMateriasCursadas(14);
+        for(Materia mat:listMat){
+            System.out.println(mat);
+        }
+          
+          
+          
     }
 
 }
