@@ -167,7 +167,7 @@ public class InscripcionData {
     
     public List<Inscripcion> obtenerInscripcionPorAlumno(int idAmulno){
         List<Inscripcion> inscripciones=new ArrayList<>();
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        String sql = "SELECT * FROM inscripcion WHERE id_alumno = ?";
             try {
                 PreparedStatement ps= con.prepareStatement(sql);
                 ps.setInt(1, idAmulno);
