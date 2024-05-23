@@ -18,7 +18,7 @@ public class Main_Principal {
         
         //Guardar Alumno
        LocalDate fecha= LocalDate.of (2000,02,12 );
-       Alumno alumno=new Alumno(16,45116754, "Carlo", "cruz", fecha, true);
+       Alumno alumno=new Alumno(5,45116754, "Carlo", "cruz", fecha, true);
 //       AlumnoData ad=new AlumnoData();
 //       ad.guardarAlumno(alumno);
 //       
@@ -41,7 +41,7 @@ public class Main_Principal {
 //        ad.eliminarAlumno(1);
 //        
        
-          Materia mat=new Materia(18,"web", 2010, true);
+          Materia mat=new Materia(3,"web", 2010, true);
 //          MateriaData mt= new MateriaData();
 //            mt.guardarMateria(mat);
 
@@ -64,8 +64,10 @@ public class Main_Principal {
 //        }
          
         Inscripcion inscriptPueba=new Inscripcion(alumno,mat,9);
-          inscripData.GuardarInscripcion(inscriptPueba);
-          inscripData.borrarInscripcionMateriaAlumno(16, 18);
+          //inscripData.GuardarInscripcion(inscriptPueba);
+          //inscripData.borrarInscripcionMateriaAlumno(16, 18);
+          inscripData.actualizarNota(5, 3, 7);
+          
     }
 
 }

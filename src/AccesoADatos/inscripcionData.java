@@ -11,6 +11,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 /**
  *
@@ -185,6 +186,27 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null,"Error al obtener las inscripciones");
             }
         return inscripciones;
+    }
+    
+    public void actualizarNota(int id_alumno, int id_materia, double nota){
+       String sql="UPDATE inscripcion SET nota=? WHERE id_alumno=? AND id_materia=? ";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setDouble(1,nota);
+            ps.setInt(2, id_alumno);
+            ps.setInt(3, id_materia);
+           
+            int filas=ps.executeUpdate();
+            if (filas>0) {
+                JOptionPane.showMessageDialog(null,"nota actualizada");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error en la tabla inscripcion");
+        }
+        
+    
+    
     }
     
 }
