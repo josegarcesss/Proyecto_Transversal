@@ -117,4 +117,24 @@ public class InscripcionData {
         return alumnos;
     }
     
+    public List<Inscripcion> obtenerInscripciones() {
+        List<Inscripcion> inscripciones = new ArrayList<>();
+        String sql= "SELECT * FROM inscripcion";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Inscripcion inscripcion = new Inscripcion();
+                ps.setInt(1, inscripcion.getId_Inscripcion());
+                ps.setDouble(2,inscripcion.getNota());
+                inscripcion.setAlumno(alumData.buscarAlumno(rs.getInt("id_alumno")));
+                inscripcion.setMateria(matData.buscarMateria(rs.getInt("id_materia")));
+                inscripciones.add(inscripcion);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Error al obtener las inscripciones");
+            }
+        return inscripciones;
+    }
 }
