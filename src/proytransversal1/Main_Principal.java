@@ -4,6 +4,7 @@ package proytransversal1;
 
 import AccesoADatos.AlumnoData;
 import AccesoADatos.MateriaData;
+import AccesoADatos.InscripcionData;
 import Entidades.Alumno;
 import Entidades.Materia;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Main_Principal {
         //@param args the command line arguments
     public static void main(String[] args) {
+        
         //Guardar Alumno
 //       LocalDate fecha= LocalDate.of (2000,02,12 );
 //       Alumno alumno=new Alumno(45116754, "Carlo", "cruz", fecha, true);
@@ -38,8 +40,8 @@ public class Main_Principal {
 //        ad.eliminarAlumno(1);
 //        
        
-          Materia mat=new Materia("web", 2010, true);
-          MateriaData ad= new MateriaData();
+//          Materia mat=new Materia("web", 2010, true);
+//          MateriaData ad= new MateriaData();
            // ad.guardarMateria(mat);
 
           //Materia encon= ad.buscarMateria(1);
@@ -49,10 +51,10 @@ public class Main_Principal {
           //ad.modificarMateria(mat2);
           
           //ad.eliminarMateria(1);
-          
-          List<Materia> lista= ad.listarMateria();
-          for (Materia materia:lista) {
-              System.out.println(materia);
+          InscripcionData inscripData=new InscripcionData();
+          List<Alumno> listar= inscripData.obtenerAlumnosXMateria(15) ;
+          for (Alumno alum:listar){
+              System.out.println(alum);
         }
     }
 
