@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class InscripcionData {
     
     private Connection con;
-    private AlumnoData alumData;
-    private MateriaData matData;
+    private AlumnoData alumData= new AlumnoData();
+    private MateriaData matData= new MateriaData();
     
     public InscripcionData(){
         con = Conexion.getConexion();
@@ -134,11 +134,13 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Inscripcion inscripcion = new Inscripcion();
-                ps.setInt(1, inscripcion.getId_Inscripcion());
-                ps.setDouble(2,inscripcion.getNota());
-                inscripcion.setAlumno(alumData.buscarAlumno(rs.getInt("id_alumno")));
-                inscripcion.setMateria(matData.buscarMateria(rs.getInt("id_materia")));
-                inscripciones.add(inscripcion);
+               inscripcion.setId_Inscripcion(rs.getInt("id_inscripto"));
+                Alumno alu=alumData.buscarAlumno(rs.getInt("id_alumno"));
+                Materia materia=matData.buscarMateria(rs.getInt("id_materia"));
+                inscripcion.setAlumno(alu);
+                inscripcion.setMateria(materia);
+                inscripcion.setNota(rs.getDouble("nota"));
+                 inscripciones.add(inscripcion);
             }
             ps.close();
         }catch(SQLException ex){
@@ -166,12 +168,12 @@ public class InscripcionData {
         }
     }
     
-    public List<Inscripcion> obtenerInscripcionPorAlumno(int idAmulno){
+    public List<Inscripcion> obtenerInscripcionPorAlumno(int id_alumno){
         List<Inscripcion> inscripciones=new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE id_alumno = ?";
             try {
                 PreparedStatement ps= con.prepareStatement(sql);
-                ps.setInt(1, idAmulno);
+                ps.setInt(1, id_alumno);
                 ResultSet rs=ps.executeQuery();
                 while (rs.next()){
                  Inscripcion inscripcion = new Inscripcion();

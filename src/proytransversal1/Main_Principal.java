@@ -17,8 +17,8 @@ public class Main_Principal {
     public static void main(String[] args) {
         
         //Guardar Alumno
-       LocalDate fecha= LocalDate.of (2000,02,12 );
-       Alumno alumno=new Alumno(5,45116754, "Carlo", "cruz", fecha, true);
+//       LocalDate fecha= LocalDate.of (2000,02,12 );
+//       Alumno alumno=new Alumno(5,45116754, "Carlo", "cruz", fecha, true);
 //       AlumnoData ad=new AlumnoData();
 //       ad.guardarAlumno(alumno);
 //       
@@ -41,7 +41,7 @@ public class Main_Principal {
 //        ad.eliminarAlumno(1);
 //        
        
-          Materia mat=new Materia(3,"web", 2010, true);
+//          Materia mat=new Materia(3,"web", 2010, true);
 //          MateriaData mt= new MateriaData();
 //            mt.guardarMateria(mat);
 
@@ -53,7 +53,7 @@ public class Main_Principal {
           
           //ad.eliminarMateria(1);
           
-          InscripcionData inscripData=new InscripcionData();
+//          InscripcionData inscripData=new InscripcionData();
 //          List<Alumno> listar= inscripData.obtenerAlumnosXMateria(15) ;
 //          for (Alumno alum:listar){
 //              System.out.println(alum);
@@ -63,10 +63,24 @@ public class Main_Principal {
 //            System.out.println(mat);
 //        }
          
-        Inscripcion inscriptPueba=new Inscripcion(alumno,mat,9);
+//        Inscripcion inscriptPueba=new Inscripcion(alumno,mat,9);
           //inscripData.GuardarInscripcion(inscriptPueba);
           //inscripData.borrarInscripcionMateriaAlumno(16, 18);
-          inscripData.actualizarNota(5, 3, 7);
+          //inscripData.actualizarNota(5, 3, 7);
+          //for (Inscripcion insc:inscripData.obtenerInscripciones()) {
+              //System.out.println("id: "+ insc.getId_Inscripcion() );
+              //System.out.println("nombre: "+ insc.getAlumno().getNombre());
+              //System.out.println("materia: "+ insc.getMateria().getNombre());
+        //}
+//        for (Inscripcion insc2:inscripData.obtenerInscripcionPorAlumno(5)) {
+//            System.out.println("nombre de la materia: "+insc2.getMateria().getNombre());
+//            System.out.println("apellido: "+insc2.getAlumno().getApellido());
+//            
+//        }
+//        for (Materia mat2:inscripData.obtenerMateriasNOCursadas(5)) {
+//            System.out.println(mat2);
+//        }
+
           
     }
 
