@@ -145,4 +145,24 @@ public class InscripcionData {
             }
         return inscripciones;
     }
+    
+    public void borrarInscripcionMateriaAlumno(int id_alumno,int id_materia){
+        String sql="DELETE FROM inscripcion WHERE id_alumno=? AND id_materia=?";
+        try{
+            PreparedStatement ps =con.prepareStatement(sql);
+            ps.setInt(1, id_alumno);
+            ps.setInt(2, id_materia);
+           
+            int rs= ps.executeUpdate();
+            if (rs>0) {              
+                JOptionPane.showMessageDialog(null,"*Inscripcion Eliminada*");
+            }else{
+                JOptionPane.showMessageDialog(null,"*Datos erroneos*");
+            }
+            ps.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Error al borrar la inscripcion!");
+        }
+    }
+    
 }

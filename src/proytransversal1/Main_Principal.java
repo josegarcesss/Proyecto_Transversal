@@ -65,7 +65,7 @@ public class Main_Principal {
          
         Inscripcion inscriptPueba=new Inscripcion(alumno,mat,9);
           inscripData.GuardarInscripcion(inscriptPueba);
-          
+          inscripData.borrarInscripcionMateriaAlumno(16, 18);
     }
 
 }
