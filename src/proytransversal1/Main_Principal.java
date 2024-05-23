@@ -6,6 +6,7 @@ import AccesoADatos.AlumnoData;
 import AccesoADatos.MateriaData;
 import AccesoADatos.InscripcionData;
 import Entidades.Alumno;
+import Entidades.Inscripcion;
 import Entidades.Materia;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,8 +17,8 @@ public class Main_Principal {
     public static void main(String[] args) {
         
         //Guardar Alumno
-//       LocalDate fecha= LocalDate.of (2000,02,12 );
-//       Alumno alumno=new Alumno(45116754, "Carlo", "cruz", fecha, true);
+       LocalDate fecha= LocalDate.of (2000,02,12 );
+       Alumno alumno=new Alumno(16,45116754, "Carlo", "cruz", fecha, true);
 //       AlumnoData ad=new AlumnoData();
 //       ad.guardarAlumno(alumno);
 //       
@@ -40,9 +41,9 @@ public class Main_Principal {
 //        ad.eliminarAlumno(1);
 //        
        
-//          Materia mat=new Materia("web", 2010, true);
-//          MateriaData ad= new MateriaData();
-           // ad.guardarMateria(mat);
+          Materia mat=new Materia(18,"web", 2010, true);
+//          MateriaData mt= new MateriaData();
+//            mt.guardarMateria(mat);
 
           //Materia encon= ad.buscarMateria(1);
           //System.out.println(encon);
@@ -51,17 +52,19 @@ public class Main_Principal {
           //ad.modificarMateria(mat2);
           
           //ad.eliminarMateria(1);
+          
           InscripcionData inscripData=new InscripcionData();
-          List<Alumno> listar= inscripData.obtenerAlumnosXMateria(15) ;
-          for (Alumno alum:listar){
-              System.out.println(alum);
-        }
-          List<Materia> listMat= inscripData.obtenerMateriasCursadas(14);
-        for(Materia mat:listMat){
-            System.out.println(mat);
-        }
-          
-          
+//          List<Alumno> listar= inscripData.obtenerAlumnosXMateria(15) ;
+//          for (Alumno alum:listar){
+//              System.out.println(alum);
+//        }
+//          List<Materia> listMat= inscripData.obtenerMateriasCursadas(14);
+//        for(Materia mat1:listMat){
+//            System.out.println(mat);
+//        }
+         
+        Inscripcion inscriptPueba=new Inscripcion(alumno,mat,9);
+          inscripData.GuardarInscripcion(inscriptPueba);
           
     }
 

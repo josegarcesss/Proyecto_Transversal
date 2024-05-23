@@ -81,7 +81,7 @@ public class InscripcionData {
     
     
     public void GuardarInscripcion(Inscripcion inscripcion){
-        String sql="INSERT INTO inscripcion (id_alumno, id_materia) VALUES (?, ?,?)";
+        String sql="INSERT INTO inscripcion (id_alumno, id_materia, nota) VALUES (?, ?,?)";
         try{
             PreparedStatement ps =con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, inscripcion.getAlumno().getId_alumno());
