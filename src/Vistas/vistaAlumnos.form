@@ -113,7 +113,7 @@
                           <Component id="jt_Apellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="jDC_FechaN" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -175,8 +175,6 @@
         <Property name="text" type="java.lang.String" value="Fecha de Nacimiento:"/>
       </Properties>
     </Component>
-    <Component class="org.netbeans.modules.form.InvalidComponent" name="jDC_FechaN">
-    </Component>
     <Component class="javax.swing.JButton" name="jb_Buscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
@@ -213,6 +211,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_SalirActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDC_FechaN">
     </Component>
   </SubComponents>
 </Form>

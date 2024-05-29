@@ -47,12 +47,12 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
         jcb_Estado = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jDC_FechaN = new org.netbeans.modules.form.InvalidComponent();
         jb_Buscar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jb_Guardar = new javax.swing.JButton();
         jb_Eliminar = new javax.swing.JButton();
         jb_Salir = new javax.swing.JButton();
+        jDC_FechaN = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setText("Documento:");
 
@@ -174,7 +174,7 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
                             .addComponent(jb_Buscar)
                             .addComponent(jt_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jDC_FechaN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
@@ -257,7 +257,7 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private org.netbeans.modules.form.InvalidComponent jDC_FechaN;
+    private com.toedter.calendar.JDateChooser jDC_FechaN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
