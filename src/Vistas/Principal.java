@@ -63,6 +63,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Materia");
 
         jm_FormularioMateria.setText("Formulario de Materia");
+        jm_FormularioMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_FormularioMateriaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jm_FormularioMateria);
 
         jMenuBar1.add(jMenu2);
@@ -112,11 +117,20 @@ public class Principal extends javax.swing.JFrame {
     private void jm_FormularioAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_FormularioAlumnoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        vistaMateria vM= new vistaMateria();
-        vM.setVisible(true);
-        escritorio.add(vM);       
+        vistaAlumnos va= new vistaAlumnos();
+        va.setVisible(true);
+        escritorio.add(va);
+              
         
     }//GEN-LAST:event_jm_FormularioAlumnoActionPerformed
+
+    private void jm_FormularioMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_FormularioMateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaMateria vM= new vistaMateria();
+        vM.setVisible(true);
+        escritorio.add(vM); 
+    }//GEN-LAST:event_jm_FormularioMateriaActionPerformed
 
     /**
      * @param args the command line arguments
