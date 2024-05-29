@@ -175,7 +175,7 @@
         <Property name="text" type="java.lang.String" value="Fecha de Nacimiento:"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDC_FechaN">
+    <Component class="org.netbeans.modules.form.InvalidComponent" name="jDC_FechaN">
     </Component>
     <Component class="javax.swing.JButton" name="jb_Buscar">
       <Properties>

@@ -4,12 +4,17 @@
  */
 package Vistas;
 
+import Entidades.Materia;
+import AccesoADatos.MateriaData;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alakyan
  */
 public class vistaMateria extends javax.swing.JInternalFrame {
-
+    MateriaData materiaData=new MateriaData();
     /**
      * Creates new form vistaMateria
      */
@@ -37,10 +42,10 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         jt_anno = new javax.swing.JTextField();
         jcb_Estado = new javax.swing.JCheckBox();
         jb_Buscar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jb_Nuevo = new javax.swing.JButton();
+        jb_Guardar = new javax.swing.JButton();
+        jb_Eliminar = new javax.swing.JButton();
+        jb_salir = new javax.swing.JButton();
 
         setName("Materia"); // NOI18N
 
@@ -63,13 +68,28 @@ public class vistaMateria extends javax.swing.JInternalFrame {
 
         jb_Buscar.setText("Buscar");
 
-        jButton1.setText("Nuevo");
+        jb_Nuevo.setText("Nuevo");
+        jb_Nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_NuevoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Guardar");
+        jb_Guardar.setText("Guardar");
 
-        jButton3.setText("Eliminar");
+        jb_Eliminar.setText("Eliminar");
+        jb_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_EliminarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Salir");
+        jb_salir.setText("Salir");
+        jb_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,16 +123,16 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
+                                        .addComponent(jb_Nuevo)
                                         .addGap(47, 47, 47)
-                                        .addComponent(jButton3)
+                                        .addComponent(jb_Eliminar)
                                         .addGap(48, 48, 48)
-                                        .addComponent(jButton4))
+                                        .addComponent(jb_salir))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
                                         .addComponent(jcb_Estado)))
-                                .addComponent(jButton2)))))
+                                .addComponent(jb_Guardar)))))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -136,17 +156,16 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(jt_anno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jcb_Estado)))
+                    .addComponent(jcb_Estado)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jb_Guardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(55, 55, 55))
+                    .addComponent(jb_Nuevo)
+                    .addComponent(jb_Eliminar)
+                    .addComponent(jb_salir))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -156,12 +175,47 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jt_CodigoActionPerformed
 
+    private void jb_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_NuevoActionPerformed
+        // TODO add your handling code here:
+        jt_Codigo.setText("");
+        jt_Nombre.setText("");
+        jt_anno.setText("");
+    }//GEN-LAST:event_jb_NuevoActionPerformed
+
+    private void jb_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarActionPerformed
+        int cod;
+        Materia mat;
+        List<Materia> listado = materiaData.listarMateria();        
+        //1° VERIFICA QUE SE HAYA INGRESADO UN NUMERO ENTERO EN EL CODIGO
+        try{
+        cod=Integer.parseInt(jt_Codigo.getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El codigo es un Numero entero!");
+            return;
+        }        
+        //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO, EN CASO CONTRARIO AVISA QUE NO SE ENCUENTRA ALGUNA MATERIA CON ESE ID
+        if(materiaData.buscarMateria(cod)!=null){
+        mat=materiaData.buscarMateria(cod);
+        //3° RECORRE EL LISTADO DE MATERIAS DE LA BASE DE DATOS Y COMPARA LOS ID 
+        for (Materia materia : listado) {
+            if(materia.getId_Materia()== mat.getId_Materia()){
+        //4° SI LO ENCUENTRA, REVISA SI FUE ELIMINADA DE FORMA LOGICA CON ANTERIORIDAD E INFORMA AL RESPECTO
+                if(!materia.isEstado()){
+                JOptionPane.showMessageDialog(this,"La Materia se encuentra Inactiva!");                
+                }
+            }
+        }
+        }else{
+            JOptionPane.showMessageDialog(this,"No se encunetra la materia!");
+        }
+    }//GEN-LAST:event_jb_EliminarActionPerformed
+
+    private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
+    dispose();
+    }//GEN-LAST:event_jb_salirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -169,6 +223,10 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jb_Buscar;
+    private javax.swing.JButton jb_Eliminar;
+    private javax.swing.JButton jb_Guardar;
+    private javax.swing.JButton jb_Nuevo;
+    private javax.swing.JButton jb_salir;
     private javax.swing.JCheckBox jcb_Estado;
     private javax.swing.JTextField jt_Codigo;
     private javax.swing.JTextField jt_Nombre;

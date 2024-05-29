@@ -5,8 +5,6 @@ import Entidades.Materia;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -96,8 +94,7 @@ public class MateriaData {
             }else{
             JOptionPane.showMessageDialog(null, "no se encontro la materia");
             }
-            
-            
+            ps.close();
         } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al ingresar a la base de datos");
         }

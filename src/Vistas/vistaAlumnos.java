@@ -47,7 +47,7 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
         jcb_Estado = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jDC_FechaN = new com.toedter.calendar.JDateChooser();
+        jDC_FechaN = new org.netbeans.modules.form.InvalidComponent();
         jb_Buscar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jb_Guardar = new javax.swing.JButton();
@@ -257,7 +257,7 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDC_FechaN;
+    private org.netbeans.modules.form.InvalidComponent jDC_FechaN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
