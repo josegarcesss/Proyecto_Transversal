@@ -13,26 +13,26 @@ import java.time.LocalDate;
 public class Alumno {
     private int id_alumno;
     private int dni;
-    private String nombre;
     private String apellido;
+    private String nombre;
     private LocalDate fechaN;
     private boolean estado;
 
     public Alumno() {}
 
-    public Alumno(int dni,String nombre, String apellido, LocalDate fechaN, boolean estado) {
+    public Alumno(int dni,String apellido, String nombre, LocalDate fechaN, boolean estado) {
         this.dni=dni;
-        this.nombre = nombre;
         this.apellido = apellido;
+        this.nombre = nombre;
         this.fechaN = fechaN;
         this.estado = estado;
     }
 
-    public Alumno(int id_alumno,int dni, String nombre, String apellido, LocalDate fechaN, boolean estado) {
+    public Alumno(int id_alumno,int dni, String apellido, String nombre, LocalDate fechaN, boolean estado) {
         this.id_alumno = id_alumno;
         this.dni=dni;
-        this.nombre = nombre;
         this.apellido = apellido;
+        this.nombre=nombre;
         this.fechaN = fechaN;
         this.estado = estado;
     }
@@ -52,16 +52,6 @@ public class Alumno {
     public void setDNI(int dni) {
         this.dni = dni;
     }
-    
-    
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getApellido() {
         return apellido;
@@ -69,6 +59,13 @@ public class Alumno {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+     public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public LocalDate getFechaN() {
@@ -89,7 +86,7 @@ public class Alumno {
     
     @Override
     public String toString(){
-        return(id_alumno+" - "+dni+" - "+nombre+" - "+apellido+" - "+fechaN+" - "+estado);
+        return(id_alumno+" - "+dni+" - "+apellido+" - "+nombre+" - "+fechaN+" - "+estado);
     } 
 
     

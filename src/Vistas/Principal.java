@@ -1,12 +1,12 @@
 
 package Vistas;
 
-import Entidades.Alumno;
-import java.util.TreeSet;
+
+
 
 
 public class Principal extends javax.swing.JFrame {
-private TreeSet<Alumno> alum=new TreeSet<>();
+
     /**
      * Creates new form Principal
      */
@@ -41,11 +41,11 @@ private TreeSet<Alumno> alum=new TreeSet<>();
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGap(0, 759, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
+            .addGap(0, 471, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Alumno");
@@ -93,11 +93,17 @@ private TreeSet<Alumno> alum=new TreeSet<>();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(escritorio)
+                .addContainerGap())
         );
 
         pack();
@@ -106,10 +112,10 @@ private TreeSet<Alumno> alum=new TreeSet<>();
     private void jm_FormularioAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_FormularioAlumnoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        vistaAlumnos va= new vistaAlumnos(alum);
+        vistaAlumnos va= new vistaAlumnos();
         va.setVisible(true);
         escritorio.add(va);
-        escritorio.moveToFront(va);
+        
         
         
     }//GEN-LAST:event_jm_FormularioAlumnoActionPerformed

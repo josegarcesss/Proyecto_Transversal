@@ -4,20 +4,28 @@
  */
 package Vistas;
 
+import AccesoADatos.AlumnoData;
 import Entidades.Alumno;
-import java.util.TreeSet;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alakyan
  */
 public class vistaAlumnos extends javax.swing.JInternalFrame {
-private TreeSet<Alumno> alum;
+    private AlumnoData alumdata=new AlumnoData();
+    private Alumno alumno= null;
+   
     /**
      * Creates new form vistaAlumnos
      */
-    public vistaAlumnos(TreeSet<Alumno> alum) {
-        this.alum=alum;
+    public vistaAlumnos() {
+        
         initComponents();
     }
 
@@ -60,6 +68,11 @@ private TreeSet<Alumno> alum;
         jLabel6.setText("Fecha de Nacimiento:");
 
         jb_Buscar.setText("Buscar");
+        jb_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_BuscarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Nuevo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,10 +82,20 @@ private TreeSet<Alumno> alum;
         });
 
         jb_Guardar.setText("Guardar");
+        jb_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_GuardarActionPerformed(evt);
+            }
+        });
 
         jb_Eliminar.setText("Eliminar");
 
         jb_Salir.setText("Salir");
+        jb_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,13 +117,13 @@ private TreeSet<Alumno> alum;
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jt_Nombre)
-                                            .addComponent(jt_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jt_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(29, 29, 29))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton2)
@@ -135,13 +158,11 @@ private TreeSet<Alumno> alum;
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jt_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -150,7 +171,8 @@ private TreeSet<Alumno> alum;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jt_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jb_Buscar))
+                            .addComponent(jb_Buscar)
+                            .addComponent(jt_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -161,19 +183,77 @@ private TreeSet<Alumno> alum;
                     .addComponent(jb_Guardar)
                     .addComponent(jb_Eliminar)
                     .addComponent(jb_Salir))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        LimpiarCampos();
+        alumno=null;
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jb_SalirActionPerformed
+
+    private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
+        try{
+            Integer dni= Integer.parseInt(jt_DNI.getText());
+            alumno=alumdata.buscarAlumnoPorDni(dni);
+            if(alumno!=null){
+            jt_Apellido.setText(alumno.getApellido());
+            jt_Nombre.setText(alumno.getNombre());
+            jcb_Estado.setSelected(alumno.isEstado());
+            LocalDate lc=alumno.getFechaN();
+            java.util.Date date=java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            jDC_FechaN.setDate(date);
+            
+            }
+        
+        }catch(NumberFormatException ex){
+        JOptionPane.showMessageDialog(this,"Debe ingresar un numero valido");
+        }
+       
+    }//GEN-LAST:event_jb_BuscarActionPerformed
+
+    private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
+       try{ 
+            Integer dni= Integer.parseInt(jt_DNI.getText());
+            String apellido=jt_Apellido.getText();
+            String nombre=jt_Nombre.getText();
+            if(apellido.isEmpty()||nombre.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+                return;
+            }
+            java.util.Date fecha= jDC_FechaN.getDate();
+            LocalDate fechanac=fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Boolean estado=jcb_Estado.isSelected();
+            if(alumno==null){
+            alumno=new Alumno(dni, apellido, nombre, fechanac, estado);
+            alumdata.guardarAlumno(alumno);
+
+            }else{
+            alumno.setDNI(dni);
+            alumno.setApellido(apellido);
+            alumno.setNombre(nombre);
+            alumno.setFechaN(fechanac); 
+            alumdata.modificarAlumno(alumno);
+            }
+
+            }catch(NumberFormatException ext){
+            JOptionPane.showMessageDialog(this,"Debe ingresar un numero valido");
+            }
+    }//GEN-LAST:event_jb_GuardarActionPerformed
+    private void LimpiarCampos(){
         jt_Apellido.setText("");
         jt_Nombre.setText("");
         jt_DNI.setText("");
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+        jcb_Estado.setSelected(true);
+        jDC_FechaN.setDate(new Date());
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
