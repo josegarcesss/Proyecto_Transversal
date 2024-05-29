@@ -119,9 +119,7 @@ public class Principal extends javax.swing.JFrame {
         escritorio.repaint();
         vistaAlumnos va= new vistaAlumnos();
         va.setVisible(true);
-        escritorio.add(va);
-              
-        
+        escritorio.add(va);              
     }//GEN-LAST:event_jm_FormularioAlumnoActionPerformed
 
     private void jm_FormularioMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_FormularioMateriaActionPerformed
