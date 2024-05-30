@@ -4,16 +4,34 @@
  */
 package Vistas;
 
+import AccesoADatos.AlumnoData;
+import AccesoADatos.InscripcionData;
+import AccesoADatos.MateriaData;
+import Entidades.Alumno;
+import Entidades.Materia;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Thomas
  */
 public class VistaInscripcion extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form VistaInscripcion
-     */
+    private ArrayList<Materia>listaM;
+    private ArrayList<Alumno> listaA;
+    private InscripcionData inscdata;
+    private MateriaData matdata;
+    private AlumnoData alumdata;
+    private DefaultTableModel tabla;
+    
     public VistaInscripcion() {
+        alumdata=new AlumnoData();
+        listaA=( ArrayList<Alumno>)alumdata.listarAlumnos();
+        tabla= new DefaultTableModel();
+        matdata= new MateriaData();
+        inscdata= new InscripcionData();
+        cargarAlumnos();
+        armarCabecera();
         initComponents();
     }
 
@@ -152,7 +170,26 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
     dispose();
     }//GEN-LAST:event_jb_SalirActionPerformed
-
+ private void cargarAlumnos(){
+    for(Alumno item:listaA)
+        jcb_ListaAlumno.addItem(item);
+    }
+    private void armarCabecera(){
+    ArrayList<Object>filacabecera=new ArrayList<>();
+    filacabecera.add("ID");
+    filacabecera.add("Nombre");
+    filacabecera.add("Año");
+    for(Object it:filacabecera){
+    tabla.addColumn(it);
+    }
+    jt_ListaMaterias.setModel(tabla);
+    }
+    private void borrarFilas(){
+        int filas=tabla.getRowCount()-1;        
+        for (int f = filas; f >= 0; f--) {
+            tabla.removeRow(f);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
