@@ -232,32 +232,69 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_BuscarActionPerformed
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
-       try{ 
-            Integer dni= Integer.parseInt(jt_DNI.getText());
-            String apellido=jt_Apellido.getText();
-            String nombre=jt_Nombre.getText();
-            if(apellido.isEmpty()||nombre.isEmpty()){
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
-                return;
-            }
-            java.util.Date fecha= jDC_FechaN.getDate();
+       int dni;
+       Alumno alumno=new Alumno();
+       
+       if(this.alumno!=null){
+           //MODIFICAR ALUMNO
+           if(jt_Nombre.getText().equals("")){
+               alumno.setNombre(this.alumno.getNombre());
+           }else{
+               alumno.setNombre(jt_Nombre.getText());
+           }
+           
+           if(jt_Apellido.getText().equals("")){
+               alumno.setApellido(this.alumno.getApellido());
+           }else{
+               alumno.setApellido(jt_Apellido.getText());
+           }
+           
+           alumno.setDNI(this.alumno.getDNI());
+           alumno.setId_Alumno(this.alumno.getId_alumno());
+           
+           alumno.setEstado(true);
+           
+            Date fecha= jDC_FechaN.getDate();
             LocalDate fechanac=fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Boolean estado=jcb_Estado.isSelected();
-            if(alumno==null){
-            alumno=new Alumno(dni, apellido, nombre, fechanac, estado);
-            alumdata.guardarAlumno(alumno);
+            alumno.setFechaN(fechanac);
+           
+           
+           alumdata.modificarAlumno(alumno);
+       }else{
+           //GUARDAR NUEVO ALUMNO
+           if(!jt_DNI.getText().equals("")){
+               try{
+                   dni=Integer.parseInt(jt_DNI.getText());
+                   alumno.setDNI(dni);
+               }catch(NumberFormatException e){
+                   JOptionPane.showMessageDialog(this, "El DNI debe ser un Numero entero!");
+                    return;
+               }
+           }
+           
+           if(!(jt_Nombre.getText().equals(""))){
+               alumno.setNombre(jt_Nombre.getText());
+           }else{
+               JOptionPane.showMessageDialog(this,"Falto ingresar el nombre!");
+               return;
+           }
+           if(!jt_Apellido.getText().equals("")){
+               alumno.setApellido(jt_Apellido.getText());
+           }else{
+               JOptionPane.showMessageDialog(this,"Falto ingresar el Apellido!");
+               return;
+           }
+           Date fecha= jDC_FechaN.getDate();
+           LocalDate fechanac=fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           alumno.setFechaN(fechanac);
+           
+           alumno.setEstado(jcb_Estado.isSelected());
+           
+           alumdata.guardarAlumno(alumno);
+           this.alumno=alumno;
+           
+       }
 
-            }else{
-            alumno.setDNI(dni);
-            alumno.setApellido(apellido);
-            alumno.setNombre(nombre);
-            alumno.setFechaN(fechanac); 
-            alumdata.modificarAlumno(alumno);
-            }
-
-            }catch(NumberFormatException ext){
-            JOptionPane.showMessageDialog(this,"Debe ingresar un numero valido");
-            }
     }//GEN-LAST:event_jb_GuardarActionPerformed
 
     private void jb_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarActionPerformed
@@ -273,9 +310,10 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
         if(null!=alumdata.buscarAlumnoPorDni(DNI)){
             int id=alumdata.buscarAlumnoPorDni(DNI).getId_alumno();
             alumdata.eliminarAlumno(id);
-                }else{
-            JOptionPane.showMessageDialog(this, "algo paso");
-        }
+                }
+        LimpiarCampos();
+        this.alumno=null;
+        jt_DNI.enable();
     }//GEN-LAST:event_jb_EliminarActionPerformed
     
     
@@ -285,7 +323,6 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
         jt_Nombre.setText("");
         jt_DNI.setText("");
         jcb_Estado.setSelected(true);
-        jDC_FechaN.setDate(new Date());
     
     }
 

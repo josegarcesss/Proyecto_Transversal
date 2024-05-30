@@ -214,6 +214,11 @@ public class vistaMateria extends javax.swing.JInternalFrame {
             materiaData.buscarMateria(cod);  
             materiaData.eliminarMateria(cod);
                 }
+        jt_Codigo.setText("");
+        jt_Nombre.setText("");
+        jt_anno.setText("");
+        this.materia=null;
+        jt_Codigo.enable();
     }//GEN-LAST:event_jb_EliminarActionPerformed
 
     private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
@@ -291,12 +296,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this,"Falto ingresar el año!");
                 return;
             }
-            if(jcb_Estado.isSelected()){
-                materia.setEstado(true);
-            }else{
-                JOptionPane.showMessageDialog(this,"La materia tiene que estar activa");
-                return;
-            }
+            materia.setEstado(jcb_Estado.isSelected());
             jt_Codigo.setText("");
             materiaData.guardarMateria(materia);
             this.materia=materia;
