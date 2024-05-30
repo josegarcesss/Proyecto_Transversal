@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< Updated upstream
-            <file>file:/J:/Doc-HDD/Lab1/Practica/Proyecto_Tranversal1/src/Entidades/Materia.java</file>
-            <file>file:/J:/Doc-HDD/Lab1/Practica/Proyecto_Tranversal1/src/Vistas/vistaMateria.java</file>
-            <file>file:/J:/Doc-HDD/Lab1/Practica/Proyecto_Tranversal1/src/AccesoADatos/InscripcionData.java</file>
-            <file>file:/J:/Doc-HDD/Lab1/Practica/Proyecto_Tranversal1/src/AccesoADatos/MateriaData.java</file>
-            <file>file:/J:/Doc-HDD/Lab1/Practica/Proyecto_Tranversal1/src/AccesoADatos/AlumnoData.java</file>
-            <file>file:/J:/Doc-HDD/Lab1/Practica/Proyecto_Tranversal1/src/Vistas/Principal.java</file>
-=======
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/AccesoADatos/AlumnoData.java</file>
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/AccesoADatos/inscripcionData.java</file>
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/Vistas/Principal.java</file>
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/Vistas/vistaAlumnos.java</file>
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/AccesoADatos/Conexion.java</file>
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/Vistas/vistaMateria.java</file>
-            <file>file:/G:/ULP/web1/practico1/Practico%20web%201/Proyecto_Transversal/src/AccesoADatos/MateriaData.java</file>
->>>>>>> Stashed changes
-        </group>
+        <group/>
     </open-files>
 </project-private>
