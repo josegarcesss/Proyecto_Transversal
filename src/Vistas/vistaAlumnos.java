@@ -63,6 +63,9 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("Alumno");
 
+        jcb_Estado.setSelected(true);
+        jcb_Estado.setEnabled(false);
+
         jLabel5.setText("Estado:");
 
         jLabel6.setText("Fecha de Nacimiento:");
@@ -197,6 +200,7 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         LimpiarCampos();
         alumno=null;
+        jt_DNI.enable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
@@ -204,23 +208,27 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_SalirActionPerformed
 
     private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
+        int dni;
+        //1° VERIFICA QUE SE HAYA INGRESADO UN NUMERO ENTERO EN EL DNI
         try{
-            Integer dni= Integer.parseInt(jt_DNI.getText());
-            alumno=alumdata.buscarAlumnoPorDni(dni);
-            if(alumno!=null){
-            jt_Apellido.setText(alumno.getApellido());
-            jt_Nombre.setText(alumno.getNombre());
-            jcb_Estado.setSelected(alumno.isEstado());
-            LocalDate lc=alumno.getFechaN();
-            java.util.Date date=java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            jDC_FechaN.setDate(date);
-            
-            }
-        
-        }catch(NumberFormatException ex){
-        JOptionPane.showMessageDialog(this,"Debe ingresar un numero valido");
+        dni=Integer.parseInt(jt_DNI.getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El codigo es un Numero entero!");
+            return;
         }
-       
+            if(alumno==null){                
+
+            jt_Apellido.setText(alumdata.buscarAlumnoPorDni(dni).getApellido());
+            jt_Nombre.setText(alumdata.buscarAlumnoPorDni(dni).getNombre());
+            jcb_Estado.setSelected(alumdata.buscarAlumnoPorDni(dni).isEstado());
+            LocalDate lc=alumdata.buscarAlumnoPorDni(dni).getFechaN();
+            Date date=Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            jDC_FechaN.setDate(date);
+            jt_DNI.setText(alumdata.buscarAlumnoPorDni(dni).getDNI()+"");
+             jt_DNI.disable();
+             
+             alumno=alumdata.buscarAlumnoPorDni(dni);
+            }       
     }//GEN-LAST:event_jb_BuscarActionPerformed
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
