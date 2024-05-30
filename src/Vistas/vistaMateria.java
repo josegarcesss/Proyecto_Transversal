@@ -67,6 +67,11 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         });
 
         jb_Buscar.setText("Buscar");
+        jb_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_BuscarActionPerformed(evt);
+            }
+        });
 
         jb_Nuevo.setText("Nuevo");
         jb_Nuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -153,12 +158,13 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jt_anno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jcb_Estado)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jt_anno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_Nuevo)
@@ -183,9 +189,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_NuevoActionPerformed
 
     private void jb_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarActionPerformed
-        int cod;
-        Materia mat;
-        List<Materia> listado = materiaData.listarMateria();        
+        int cod;    
         //1° VERIFICA QUE SE HAYA INGRESADO UN NUMERO ENTERO EN EL CODIGO
         try{
         cod=Integer.parseInt(jt_Codigo.getText());
@@ -193,24 +197,44 @@ public class vistaMateria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El codigo es un Numero entero!");
             return;
         }        
-        //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO, EN CASO CONTRARIO AVISA QUE NO SE ENCUENTRA ALGUNA MATERIA CON ESE ID
+        //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO
         if(materiaData.buscarMateria(cod)!=null){
-        mat=materiaData.buscarMateria(cod);
-        //3° RECORRE EL LISTADO DE MATERIAS DE LA BASE DE DATOS Y COMPARA LOS ID 
-        for (Materia materia : listado) {
-            if(materia.getId_Materia()== mat.getId_Materia()){
-        //4° SI LO ENCUENTRA, REVISA SI FUE ELIMINADA DE FORMA LOGICA CON ANTERIORIDAD E INFORMA AL RESPECTO
-                if(!materia.isEstado()){
-                JOptionPane.showMessageDialog(this,"La Materia se encuentra Inactiva!");                
+            materiaData.buscarMateria(cod);  
+            materiaData.eliminarMateria(cod);
                 }
-            }
-        }
-        }
     }//GEN-LAST:event_jb_EliminarActionPerformed
 
     private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
         dispose();
     }//GEN-LAST:event_jb_salirActionPerformed
+
+    private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
+        int cod;
+        List<Materia> listado = materiaData.listarMateria(); 
+        //1° VERIFICA QUE SE HAYA INGRESADO UN NUMERO ENTERO EN EL CODIGO
+        try{
+        cod=Integer.parseInt(jt_Codigo.getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El codigo es un Numero entero!");
+            return;
+        }
+        //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO
+        if(materiaData.buscarMateria(cod)!=null){
+            jt_Codigo.setText(materiaData.buscarMateria(cod).getId_Materia()+"");
+            jt_Nombre.setText(materiaData.buscarMateria(cod).getNombre());
+            jt_anno.setText(materiaData.buscarMateria(cod).getAnio_materia()+"");
+            jcb_Estado.setSelected(materiaData.buscarMateria(cod).isEstado());            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jb_BuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
