@@ -81,6 +81,11 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         });
 
         jb_Guardar.setText("Guardar");
+        jb_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_GuardarActionPerformed(evt);
+            }
+        });
 
         jb_Eliminar.setText("Eliminar");
         jb_Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +215,6 @@ public class vistaMateria extends javax.swing.JInternalFrame {
 
     private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
         int cod;
-        List<Materia> listado = materiaData.listarMateria(); 
         //1° VERIFICA QUE SE HAYA INGRESADO UN NUMERO ENTERO EN EL CODIGO
         try{
         cod=Integer.parseInt(jt_Codigo.getText());
@@ -235,6 +239,80 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jb_BuscarActionPerformed
+
+    private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
+        int cod, anno;
+        Materia materia=new Materia();
+        if(!jt_Codigo.getText().equals("") || !jt_Codigo.getText().equals("-1")){
+            try{
+                cod=Integer.parseInt(jt_Codigo.getText());    
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "El codigo debe ser un Numero entero!");
+                return;
+            }
+        }else{
+            cod=-1;
+        }
+
+        if(materiaData.buscarMateria(cod)!=null){
+            if(!(jt_Nombre.getText().equals(""))){
+                materia.setNombre(jt_Nombre.getText());
+            }else{
+                materia.setNombre(materiaData.buscarMateria(cod).getNombre());
+            }
+            
+            if(!(jt_anno.getText().equals(""))){
+                try{
+                    anno=Integer.parseInt(jt_anno.getText());
+                    materia.setAnio_materia(anno);
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El anio debe ser un Numero entero!");
+                    return;
+                }
+            }else{
+                materia.setAnio_materia(materiaData.buscarMateria(cod).getAnio_materia());
+            }
+            materia.setEstado(jcb_Estado.isSelected());
+            materia.setId_Materia(cod);
+            
+            materiaData.modificarMateria(materia);     
+            
+            
+            }else{
+            if(!(jt_Nombre.getText().equals(""))){
+                materia.setNombre(jt_Nombre.getText());
+            }else{
+                JOptionPane.showMessageDialog(this,"Falto ingresar el nombre!");
+                return;
+            }
+            if(!(jt_anno.getText().equals(""))){
+                try{
+                    anno=Integer.parseInt(jt_anno.getText());
+                    materia.setAnio_materia(anno);
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El anio debe ser un Numero entero!");
+                    return;
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"Falto ingresar el año!");
+                return;
+            }
+            if(jcb_Estado.isSelected()){
+                materia.setEstado(true);
+            }else{
+                JOptionPane.showMessageDialog(this,"La materia tiene que estar activa");
+                return;
+            }
+            materiaData.guardarMateria(materia);
+            
+            
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jb_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

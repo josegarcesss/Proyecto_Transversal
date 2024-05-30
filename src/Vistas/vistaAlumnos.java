@@ -89,6 +89,11 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
         });
 
         jb_Eliminar.setText("Eliminar");
+        jb_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_EliminarActionPerformed(evt);
+            }
+        });
 
         jb_Salir.setText("Salir");
         jb_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +251,27 @@ public class vistaAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this,"Debe ingresar un numero valido");
             }
     }//GEN-LAST:event_jb_GuardarActionPerformed
+
+    private void jb_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarActionPerformed
+        int DNI;    
+        //1° VERIFICA QUE SE HAYA INGRESADO UN NUMERO ENTERO EN EL DNI
+        try{
+        DNI=Integer.parseInt(jt_DNI.getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El codigo es un Numero entero!");
+            return;
+        }    
+        //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO
+        if(null!=alumdata.buscarAlumnoPorDni(DNI)){
+            int id=alumdata.buscarAlumnoPorDni(DNI).getId_alumno();
+            alumdata.eliminarAlumno(id);
+                }else{
+            JOptionPane.showMessageDialog(this, "algo paso");
+        }
+    }//GEN-LAST:event_jb_EliminarActionPerformed
+    
+    
+    
     private void LimpiarCampos(){
         jt_Apellido.setText("");
         jt_Nombre.setText("");
