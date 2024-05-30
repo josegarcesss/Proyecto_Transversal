@@ -197,6 +197,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         jt_Codigo.enable();
         jt_Nombre.setText("");
         jt_anno.setText("");
+        materia=null;
     }//GEN-LAST:event_jb_NuevoActionPerformed
 
     private void jb_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarActionPerformed
@@ -231,48 +232,26 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO
         if(materiaData.buscarMateria(cod)!=null){
             jt_Codigo.setText(materiaData.buscarMateria(cod).getId_Materia()+"");
-            materia.setId_Materia(cod);
             jt_Codigo.disable();
             jt_Nombre.setText(materiaData.buscarMateria(cod).getNombre());
-            materia.setNombre(materiaData.buscarMateria(cod).getNombre());
             jt_anno.setText(materiaData.buscarMateria(cod).getAnio_materia()+"");
-            materia.setAnio_materia(materiaData.buscarMateria(cod).getAnio_materia());
             jcb_Estado.setSelected(materiaData.buscarMateria(cod).isEstado());   
-            materia.setEstado(materiaData.buscarMateria(cod).isEstado());
+            materia=new Materia(cod,materiaData.buscarMateria(cod).getNombre(),(materiaData.buscarMateria(cod).getAnio_materia()),materiaData.buscarMateria(cod).isEstado());
         }
         
         
-        
-        
-        
-        
-        
-        
-        
+       
     }//GEN-LAST:event_jb_BuscarActionPerformed
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
-        int cod, anno;
+        int anno;
         Materia materia=new Materia();
-        if(!jt_Codigo.getText().equals("") || !jt_Codigo.getText().equals("-1")){
-            try{
-                cod=Integer.parseInt(jt_Codigo.getText());    
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(this, "El codigo debe ser un Numero entero!");
-                return;
-            }
-        }else{
-            cod=-1;
-        }
 
-        if(materiaData.buscarMateria(cod)!=null){
-            if(!(jt_Nombre.getText().equals(""))){
-                materia.setNombre(jt_Nombre.getText());
+        if(this.materia!=null){
+            //MODIFICAR MATERIA
+            if(jt_anno.getText().equals("")){
+                materia.setAnio_materia(this.materia.getAnio_materia());
             }else{
-                materia.setNombre(materiaData.buscarMateria(cod).getNombre());
-            }
-            
-            if(!(jt_anno.getText().equals(""))){
                 try{
                     anno=Integer.parseInt(jt_anno.getText());
                     materia.setAnio_materia(anno);
@@ -280,16 +259,20 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "El anio debe ser un Numero entero!");
                     return;
                 }
-            }else{
-                materia.setAnio_materia(materiaData.buscarMateria(cod).getAnio_materia());
             }
-            //materia.setEstado(jcb_Estado.isSelected());
-            materia.setId_Materia(cod);
+            if(jt_Nombre.getText().equals("")){
+                materia.setNombre(this.materia.getNombre());
+            }else{
+                materia.setNombre(jt_Nombre.getText());
+            }
+            materia.setEstado(true);
+            materia.setId_Materia(Integer.parseInt(jt_Codigo.getText()));
             
             materiaData.modificarMateria(materia);     
-            
-            
+
             }else{
+            //GUARDAR NUEVA MATERIA
+            
             if(!(jt_Nombre.getText().equals(""))){
                 materia.setNombre(jt_Nombre.getText());
             }else{
@@ -314,9 +297,9 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this,"La materia tiene que estar activa");
                 return;
             }
+            jt_Codigo.setText("");
             materiaData.guardarMateria(materia);
-            
-            
+            this.materia=materia;
         }
         
         
