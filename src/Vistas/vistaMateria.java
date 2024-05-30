@@ -6,6 +6,7 @@ package Vistas;
 
 import Entidades.Materia;
 import AccesoADatos.MateriaData;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class vistaMateria extends javax.swing.JInternalFrame {
     MateriaData materiaData=new MateriaData();
+    Materia materia=null;
     /**
      * Creates new form vistaMateria
      */
@@ -65,6 +67,9 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                 jt_CodigoActionPerformed(evt);
             }
         });
+
+        jcb_Estado.setSelected(true);
+        jcb_Estado.setEnabled(false);
 
         jb_Buscar.setText("Buscar");
         jb_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +194,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     private void jb_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_NuevoActionPerformed
         // TODO add your handling code here:
         jt_Codigo.setText("");
+        jt_Codigo.enable();
         jt_Nombre.setText("");
         jt_anno.setText("");
     }//GEN-LAST:event_jb_NuevoActionPerformed
@@ -225,9 +231,14 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         //2° VERIFICA QUE SE HAYA ENCONTRADO UN RESULTADO
         if(materiaData.buscarMateria(cod)!=null){
             jt_Codigo.setText(materiaData.buscarMateria(cod).getId_Materia()+"");
+            materia.setId_Materia(cod);
+            jt_Codigo.disable();
             jt_Nombre.setText(materiaData.buscarMateria(cod).getNombre());
+            materia.setNombre(materiaData.buscarMateria(cod).getNombre());
             jt_anno.setText(materiaData.buscarMateria(cod).getAnio_materia()+"");
-            jcb_Estado.setSelected(materiaData.buscarMateria(cod).isEstado());            
+            materia.setAnio_materia(materiaData.buscarMateria(cod).getAnio_materia());
+            jcb_Estado.setSelected(materiaData.buscarMateria(cod).isEstado());   
+            materia.setEstado(materiaData.buscarMateria(cod).isEstado());
         }
         
         
@@ -272,7 +283,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
             }else{
                 materia.setAnio_materia(materiaData.buscarMateria(cod).getAnio_materia());
             }
-            materia.setEstado(jcb_Estado.isSelected());
+            //materia.setEstado(jcb_Estado.isSelected());
             materia.setId_Materia(cod);
             
             materiaData.modificarMateria(materia);     

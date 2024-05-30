@@ -161,6 +161,10 @@
     <Component class="javax.swing.JTextField" name="jt_anno">
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcb_Estado">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jb_Buscar">
       <Properties>
