@@ -73,11 +73,21 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Administracion");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         jm_Inscripciones.setText("Manejo de Inscripciones");
         jMenu3.add(jm_Inscripciones);
 
         jm_Notas.setText("Manipulacion de notas");
+        jm_Notas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_NotasActionPerformed(evt);
+            }
+        });
         jMenu3.add(jm_Notas);
 
         jMenuBar1.add(jMenu3);
@@ -129,6 +139,18 @@ public class Principal extends javax.swing.JFrame {
         vM.setVisible(true);
         escritorio.add(vM); 
     }//GEN-LAST:event_jm_FormularioMateriaActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jm_NotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_NotasActionPerformed
+escritorio.removeAll();
+        escritorio.repaint();
+        vistaNotas vN= new vistaNotas();
+        vN.setVisible(true);
+        escritorio.add(vN);       
+    }//GEN-LAST:event_jm_NotasActionPerformed
 
     /**
      * @param args the command line arguments

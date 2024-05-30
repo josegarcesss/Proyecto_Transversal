@@ -37,6 +37,8 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         jb_Anular = new javax.swing.JButton();
         jb_Salir = new javax.swing.JButton();
 
+        setTitle("Formulario de Inscripcion");
+
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setText("Formulario de Inscripción");
 
@@ -74,6 +76,11 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         jb_Anular.setText("Anular Inscripcion");
 
         jb_Salir.setText("Salir");
+        jb_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,6 +148,10 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     private void jb_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_InscribirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_InscribirActionPerformed
+
+    private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
+    dispose();
+    }//GEN-LAST:event_jb_SalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
