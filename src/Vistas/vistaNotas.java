@@ -12,6 +12,7 @@ import Entidades.Materia;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -68,7 +69,7 @@ public class vistaNotas extends javax.swing.JInternalFrame {
         Alumno selec=(Alumno) jcb_Alumnos.getSelectedItem();
         inscripciones=(ArrayList<Inscripcion>) inscData.obtenerInscripcionPorAlumno(selec.getId_alumno());
         for(Inscripcion i: inscripciones){
-            modelo.addRow(new Object[] {i.getId_Inscripcion(),matData.buscarMateria(i.getMateria().getId_Materia()).getNombre(),i.getNota()});
+            modelo.addRow(new Object[] {matData.buscarMateria(i.getMateria().getId_Materia()).getId_Materia(),matData.buscarMateria(i.getMateria().getId_Materia()).getNombre(),i.getNota()});
         }
     }
     
@@ -115,7 +116,7 @@ public class vistaNotas extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -125,6 +126,11 @@ public class vistaNotas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jt_Tabla);
 
         jb_Guardar.setText("Guardar");
+        jb_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_GuardarActionPerformed(evt);
+            }
+        });
 
         jb_Salir.setText("Salir");
         jb_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +198,29 @@ public class vistaNotas extends javax.swing.JInternalFrame {
     private void jcb_AlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_AlumnosItemStateChanged
         cargaDatosInscripcion();
     }//GEN-LAST:event_jcb_AlumnosItemStateChanged
+
+    private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
+        Alumno selec=(Alumno) jcb_Alumnos.getSelectedItem();
+        double nota;
+        //        JOptionPane.showMessageDialog(this,"Dato columna 0 fila 0= "+(int)modelo.getValueAt(0,0));
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+                        try{
+                            if((Object)modelo.getValueAt(i, 2) instanceof String){
+                              nota=Double.parseDouble((String) modelo.getValueAt(i, 2));  
+                            }else{
+                               nota=(Double)modelo.getValueAt(i, 2); 
+                            }                               
+                               if(nota>10 || nota<1){
+                                        JOptionPane.showMessageDialog(this,"Ingrese un valor entre 1 y 10!");
+                                       return;
+                                   }
+                            }catch(NumberFormatException e){
+                                JOptionPane.showMessageDialog(this, "Tiene que ingresar un valor Decimal o Entero!");
+                                return;
+                            }
+                      inscData.actualizarNota(selec.getId_alumno(),(int) modelo.getValueAt(i, 0) ,nota);
+        }
+    }//GEN-LAST:event_jb_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
