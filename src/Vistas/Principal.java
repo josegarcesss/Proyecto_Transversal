@@ -80,6 +80,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jm_Inscripciones.setText("Manejo de Inscripciones");
+        jm_Inscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_InscripcionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jm_Inscripciones);
 
         jm_Notas.setText("Manipulacion de notas");
@@ -145,12 +150,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jm_NotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_NotasActionPerformed
-escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         vistaNotas vN= new vistaNotas();
         vN.setVisible(true);
         escritorio.add(vN);       
     }//GEN-LAST:event_jm_NotasActionPerformed
+
+    private void jm_InscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_InscripcionesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaInscripcion vI= new vistaInscripcion();
+        vI.setVisible(true);
+        escritorio.add(vI);
+        
+    }//GEN-LAST:event_jm_InscripcionesActionPerformed
 
     /**
      * @param args the command line arguments
