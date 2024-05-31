@@ -9,12 +9,25 @@ import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Main_Principal {
         //@param args the command line arguments
     public static void main(String[] args) {
+        
+//        InscripcionData inscData= new InscripcionData();
+//        List<Inscripcion> inscripciones=new ArrayList<>();
+//        inscripciones=inscData.obtenerInscripcionPorAlumno(13);
+//        for (Inscripcion inscripcion : inscripciones) {
+//            System.out.println(inscripcion);
+//            
+//        }
+        
+        
+        
+        
         
         //Guardar Alumno
 //       LocalDate fecha= LocalDate.of (2000,02,12 );
