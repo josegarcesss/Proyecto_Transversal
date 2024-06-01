@@ -4,10 +4,7 @@ import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
-import Entidades.Materia;
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 

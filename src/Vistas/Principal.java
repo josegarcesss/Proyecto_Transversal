@@ -100,6 +100,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.setText("Consulta");
 
         jm_AlumnosXMateria.setText("Alumnos por Materia");
+        jm_AlumnosXMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_AlumnosXMateriaActionPerformed(evt);
+            }
+        });
         jMenu4.add(jm_AlumnosXMateria);
 
         jMenuBar1.add(jMenu4);
@@ -165,6 +170,14 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(vI);
         
     }//GEN-LAST:event_jm_InscripcionesActionPerformed
+
+    private void jm_AlumnosXMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_AlumnosXMateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaAlumnosXMateria vAxM= new vistaAlumnosXMateria();
+        vAxM.setVisible(true);
+        escritorio.add(vAxM);
+    }//GEN-LAST:event_jm_AlumnosXMateriaActionPerformed
 
     /**
      * @param args the command line arguments
