@@ -25,13 +25,16 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private InscripcionData inscdata;
     private MateriaData matdata;
     private AlumnoData alumdata;
-    private DefaultTableModel tabla;
+    private DefaultTableModel tabla= new DefaultTableModel(){ 
+    public boolean isCellEditable(int f,int c){
+        return false;
+        }
+    };
     
     public vistaInscripcion() {
         
         alumdata=new AlumnoData();
         listaA=alumdata.listarAlumnos();
-        tabla= new DefaultTableModel();
         matdata= new MateriaData();
         inscdata= new InscripcionData();
         initComponents();
@@ -92,7 +95,15 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jt_ListaMaterias);
 
         jb_Inscribir.setText("Inscribir");
@@ -105,6 +116,11 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
         jb_Anular.setText("Anular Inscripcion");
         jb_Anular.setEnabled(false);
+        jb_Anular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_AnularActionPerformed(evt);
+            }
+        });
 
         jb_Salir.setText("Salir");
         jb_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +249,24 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
             jb_Inscribir.setEnabled(true);
         }
     }//GEN-LAST:event_jrb_NoInscriptoActionPerformed
+
+    private void jb_AnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_AnularActionPerformed
+        int numID;
+        String input1 = JOptionPane.showInputDialog("Ingrese el ID de la materia que quiera Anular dicha Inscripcion: ");
+        try{
+            if(!input1.equalsIgnoreCase("")){
+        numID = Integer.parseInt(input1);
+            }else{
+                JOptionPane.showMessageDialog(this, "Ingrese un valor entero!");
+                return;
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Ingrese un valor entero!");
+                return;
+        }
+        Alumno alum=(Alumno) jcb_ListaAlumno.getSelectedItem();
+        inscdata.borrarInscripcionMateriaAlumno(alum.getId_alumno(), numID);
+    }//GEN-LAST:event_jb_AnularActionPerformed
  private void cargarAlumnos(){
      for(Alumno item:listaA){
      jcb_ListaAlumno.addItem(item);
