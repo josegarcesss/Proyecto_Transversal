@@ -8,9 +8,11 @@ import AccesoADatos.AlumnoData;
 import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;
 import Entidades.Alumno;
+import Entidades.Inscripcion;
 import Entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,14 +28,16 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private DefaultTableModel tabla;
     
     public vistaInscripcion() {
+        
         alumdata=new AlumnoData();
         listaA=alumdata.listarAlumnos();
         tabla= new DefaultTableModel();
         matdata= new MateriaData();
         inscdata= new InscripcionData();
-        cargarAlumnos();
-        armarCabecera();
         initComponents();
+        armarCabecera();
+        cargarAlumnos();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -58,6 +62,12 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un Alumno:");
 
+        jcb_ListaAlumno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcb_ListaAlumnoItemStateChanged(evt);
+            }
+        });
+
         jrb_Inscripto.setText("Materia Inscripto");
         jrb_Inscripto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +76,11 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         });
 
         jrb_NoInscripto.setText("Materia no Inscripto");
+        jrb_NoInscripto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrb_NoInscriptoActionPerformed(evt);
+            }
+        });
 
         jt_ListaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,20 +174,65 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
     private void jrb_InscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_InscriptoActionPerformed
         borrarFilas();
-        jrb_NoInscripto.setSelected(false);
-        cargarDatosInscriptos();
-        jb_Anular.setEnabled(true);
-        jb_Inscribir.setEnabled(false);
+        if(jrb_Inscripto.isSelected()){
+            jrb_NoInscripto.setSelected(false);
+            cargarDatosInscriptos();
+            jb_Anular.setEnabled(true);
+            jb_Inscribir.setEnabled(false);
+}
         
     }//GEN-LAST:event_jrb_InscriptoActionPerformed
 
     private void jb_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_InscribirActionPerformed
-        // TODO add your handling code here:
+        int numID;
+        String input1 = JOptionPane.showInputDialog("Ingrese el ID de la materia a Inscribir: ");
+        try{
+            if(!input1.equalsIgnoreCase("")){
+        numID = Integer.parseInt(input1);
+            }else{
+                JOptionPane.showMessageDialog(this, "Ingrese un valor entero!");
+                return;
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Ingrese un valor entero!");
+                return;
+        }
+        Alumno alum=(Alumno) jcb_ListaAlumno.getSelectedItem();
+        Inscripcion inscripcion;
+        inscripcion = new Inscripcion(alum,matdata.buscarMateria(numID),0);
+        inscdata.GuardarInscripcion(inscripcion);
+        
     }//GEN-LAST:event_jb_InscribirActionPerformed
 
     private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
     dispose();
     }//GEN-LAST:event_jb_SalirActionPerformed
+
+    private void jcb_ListaAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_ListaAlumnoItemStateChanged
+        borrarFilas();
+        if(jrb_Inscripto.isSelected() && !jrb_NoInscripto.isSelected()){
+            jrb_NoInscripto.setSelected(false);
+            cargarDatosInscriptos();
+            jb_Anular.setEnabled(true);
+            jb_Inscribir.setEnabled(false);
+        }else if(jrb_NoInscripto.isSelected() && !jrb_Inscripto.isSelected()){
+            jrb_Inscripto.setSelected(false);
+            cargarDatosnoInscriptos();
+            jb_Anular.setEnabled(false);
+            jb_Inscribir.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_jcb_ListaAlumnoItemStateChanged
+
+    private void jrb_NoInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_NoInscriptoActionPerformed
+        borrarFilas();
+        if(jrb_NoInscripto.isSelected()){
+            jrb_Inscripto.setSelected(false);
+            cargarDatosnoInscriptos();
+            jb_Anular.setEnabled(false);
+            jb_Inscribir.setEnabled(true);
+        }
+    }//GEN-LAST:event_jrb_NoInscriptoActionPerformed
  private void cargarAlumnos(){
      for(Alumno item:listaA){
      jcb_ListaAlumno.addItem(item);
