@@ -177,8 +177,8 @@ public class InscripcionData {
                 ResultSet rs=ps.executeQuery();
                 while (rs.next()){
                  Inscripcion inscripcion = new Inscripcion();
-                ps.setInt(1, inscripcion.getId_Inscripcion());
-                ps.setDouble(2,inscripcion.getNota());
+                inscripcion.setId_Inscripcion(rs.getInt(1));
+                inscripcion.setNota(rs.getDouble(2));
                 inscripcion.setAlumno(alumData.buscarAlumno(rs.getInt("id_alumno")));
                 inscripcion.setMateria(matData.buscarMateria(rs.getInt("id_materia")));
                 inscripciones.add(inscripcion);
