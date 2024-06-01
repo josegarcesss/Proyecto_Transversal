@@ -23,8 +23,7 @@ public class vistaNotas extends javax.swing.JInternalFrame {
     private ArrayList<Inscripcion> inscripciones;
     private DefaultTableModel modelo= new DefaultTableModel(){ 
     public boolean isCellEditable(int f,int c){
-       
-        return c!=3;
+        return !(c==1 || c==0);
         }
     };
     /**

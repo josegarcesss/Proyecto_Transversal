@@ -1,6 +1,8 @@
 
 package Vistas;
 
+import javax.swing.JOptionPane;
+
 
 
 
@@ -110,6 +112,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Salir");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -178,6 +185,10 @@ public class Principal extends javax.swing.JFrame {
         vAxM.setVisible(true);
         escritorio.add(vAxM);
     }//GEN-LAST:event_jm_AlumnosXMateriaActionPerformed
+
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+    System.exit(0);
+    }//GEN-LAST:event_jMenu5ActionPerformed
 
     /**
      * @param args the command line arguments
